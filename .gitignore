@@ -1,0 +1,4 @@
+plugins/
+sysplugins/
+temp/
+.DS_Store
