@@ -28,17 +28,17 @@
 
         // エラーメッセージがない場合のみデータベースに登録
         if (!count($error_message)) {
-            // SQL準備：`id` カラムは指定しない
-            $stmt = $mysqli->prepare("INSERT INTO schedule (begin, end, place, content) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("ssss", $_POST["begin"], $_POST["end"], $_POST["place"], $_POST["content"]);
+            // UPDATE文の準備
+            $stmt = $mysqli->prepare("UPDATE schedule SET begin = ?, end = ?, place = ?, content = ? WHERE id = ?");
+            $stmt->bind_param("ssssi", $_POST["begin"], $_POST["end"], $$_POST["place"], $_POST["content"], $id);
 
-            // クエリの実行結果を確認
+            // クエリの実行と成功確認
             if ($stmt->execute()) {
-                // 成功時の処理
-                $success_message = "投稿が正常に登録されました.";
+                $success_message =  "データが更新されました．";
+                header("Location: schedule_list.php"); // 更新後にリストページへリダイレクト
+                exit();
             } else {
-                // 失敗時の処理
-                $error_message[] = "データベースエラー: 投稿の登録に失敗しました.";
+                $error_message[] = "データ更新に失敗しました: " . $mysqli->error;
             }
         }
 
@@ -57,6 +57,47 @@
         }
     }
 
+    // // データをbeginカラムで降順取得、$schedule_list配列にセットする
+    // $result = $mysqli->query("SELECT * FROM schedule ORDER BY begin DESC"); // 変更
+    // $schedule_list = array();
+    // while ($schedule = $result->fetch_array()) {
+    //     $schedule_list[] = $schedule;
+    // }
+
+    // URLパラメータ 'id' の取得
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+        // echo "取得したID: " . htmlspecialchars($id, ENT_QUOTES, 'UTF-8');
+    } else {
+        echo "IDが指定されていません。";
+    }
+
+    // ユーザー名とパスワードでデータベース内を検索する準備
+    $data = array();
+    $stmt = $mysqli->prepare("SELECT * FROM schedule WHERE id = ? LIMIT 1");
+
+    if ($stmt) {
+        // プレースホルダに `$id` をバインド
+        $stmt->bind_param("s", $id);
+        
+        // クエリの実行
+        $stmt->execute();
+        
+        // 結果を取得して確認
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            // 取得した情報を連想配列に変換
+            $data = $result->fetch_assoc();
+        } else {
+            $alert = "<script type='text/javascript'>alert('パスワードまたはユーザ名が違います．');</script>";
+            echo $alert;
+            header('Location: schedule_list.php');
+            exit();
+        }
+    } else {
+        echo "クエリの準備に失敗しました: " . $mysqli->error;
+    }    
+
     // Smartyライブラリを読み込む
     require_once("smarty/Smarty.class.php");
     $smarty = new Smarty();
@@ -68,6 +109,8 @@
     // テンプレートディレクトリの指定
 
     // テンプレート変数をアサインして、テンプレートを表示する
+    $smarty->assign("data", $data);
+
     $smarty->assign("error_message", $error_message);
     $smarty->assign("schedule_list", $schedule_list);
     $smarty->display("adjustSchedule.html"); // テンプレートを表示

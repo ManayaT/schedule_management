@@ -8,39 +8,13 @@
 <body>
 <h1>スケジュール一覧</h1>
 
-<!-- <form method="post" action="{$smarty.server.SCRIPT_NAME}">
-    <table>
-    <tr>
-        <th>id</th>
-        <td><input type="text" name="id" size="30"></td>
-    </tr>
-    <tr>
-        <th>開始日時</th>
-        <td><input type="date" name="begin" size="50"></td>
-    </tr>
-    <tr>
-        <th>終了日時</th>
-        <td><input type="date" name="end" size="50"></td>
-    </tr>
-    <tr>
-        <th>場所</th>
-        <td><input type="text" name="place" size="50"></td>
-    </tr>
-    <tr>
-        <th>内容</th>
-        <td colspan="2"><textarea name="content" cols="50" rows="5"></textarea></td>
-    </tr>
-    </table>
-    <input name="save" type="submit" value="登録する">
-</form>
-<hr> -->
-
 {* 掲示板データを表示する処理 *}
-{foreach from=$bbs_list item=bbs}
-<h2>{$bbs.title|escape}</h2>
-<p>{$bbs.date|date_format:"%Y年%m月%d日 %H:%M:%S"|escape} / 投稿者：<strong>
-{$bbs.name|escape}</strong></p>
-<p>{$bbs.body|escape|nl2br}</p>
+{foreach from=$schedule_list item=schedule}
+<h2>{$schedule.place|escape}</h2>
+<p>{$schedule.begin|date_format:"%Y年%m月%d日 %H:%M"|escape} / 投稿者：<strong>{$schedule.id|escape}</strong></p>
+<p>{$schedule.content|escape|nl2br}</p>
+<button onclick="location.href='adjust_schedule.php?id={$schedule.id|escape}'">更新</button>
+<button onclick="location.href='delete_schedule.php?id={$schedule.id|escape}'">削除</button>
 {/foreach}
 
 </body>

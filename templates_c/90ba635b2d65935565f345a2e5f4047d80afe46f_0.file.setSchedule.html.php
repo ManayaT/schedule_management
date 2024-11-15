@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.5.4, created on 2024-11-14 10:02:56
+/* Smarty version 4.5.4, created on 2024-11-14 14:43:34
   from '/Applications/MAMP/htdocs/report_01/templates/setSchedule.html' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.5.4',
-  'unifunc' => 'content_67354c40e87818_20237081',
+  'unifunc' => 'content_67358e06418144_89147419',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '90ba635b2d65935565f345a2e5f4047d80afe46f' => 
     array (
       0 => '/Applications/MAMP/htdocs/report_01/templates/setSchedule.html',
-      1 => 1731546172,
+      1 => 1731559694,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_67354c40e87818_20237081 (Smarty_Internal_Template $_smarty_tpl) {
+function content_67358e06418144_89147419 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/Applications/MAMP/htdocs/report_01/smarty/plugins/modifier.date_format.php','function'=>'smarty_modifier_date_format',),));
 ?>
 <!DOCTYPE html>
@@ -58,11 +58,11 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
     </tr>
     <tr>
         <th>開始日時</th>
-        <td><input type="date" name="begin" size="50"></td>
+        <td><input type="datetime-local" name="begin" size="50"></td>
     </tr>
     <tr>
         <th>終了日時</th>
-        <td><input type="date" name="end" size="50"></td>
+        <td><input type="datetime-local" name="end" size="50"></td>
     </tr>
     <tr>
         <th>場所</th>
