@@ -6,7 +6,7 @@
     <!-- <link rel="stylesheet" href="style.css"> -->
 </head>
 <body>
-<h1>スケジュール追加</h1>
+<h1>スケジュール登録</h1>
 
 {* エラーメッセージを表示する処理 *}
 {if $error_message}
@@ -36,17 +36,9 @@
         <td colspan="2"><textarea name="content" cols="50" rows="5"></textarea></td>
     </tr>
     </table>
+    <hr>
     <input name="save" type="submit" value="登録する">
 </form>
-<hr>
-
-<!-- {* 掲示板データを表示する処理 *}
-{foreach from=$bbs_list item=bbs}
-<h2>{$bbs.title|escape}</h2>
-<p>{$bbs.date|date_format:"%Y年%m月%d日 %H:%M:%S"|escape} / 投稿者：<strong>
-{$bbs.name|escape}</strong></p>
-<p>{$bbs.body|escape|nl2br}</p>
-{/foreach} -->
 
 </body>
 </html>

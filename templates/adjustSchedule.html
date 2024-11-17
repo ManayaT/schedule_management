@@ -6,7 +6,7 @@
     <!-- <link rel="stylesheet" href="style.css"> -->
 </head>
 <body>
-<h1>スケジュール管理</h1>
+<h1>スケジュール更新</h1>
 
 {* エラーメッセージを表示する処理 *}
 {if $error_message}
@@ -17,28 +17,28 @@
     </ul>
 {/if}
 
-<form method="post" action="{$smarty.server.SCRIPT_NAME}">
+<form method="post" action="adjust_schedule.php?id={$data_list.id|escape}">    
     <table>
     <tr>
         <th>開始日時</th>
-        <td><input type="datetime-local" name="begin" value="{$data['begin']|escape}" size="50"></td>
+        <td><input type="datetime-local" name="begin" value="{$data_list['begin']|escape}" size="50"></td>
     </tr>
     <tr>
         <th>終了日時</th>
-        <td><input type="datetime-local" name="end" value="{$data['end']|escape}" size="50"></td>
+        <td><input type="datetime-local" name="end" value="{$data_list['end']|escape}" size="50"></td>
     </tr>
     <tr>
         <th>場所</th>
-        <td><input type="text" name="place" value="{$data['place']|escape}" size="50"></td>
+        <td><input type="text" name="place" value="{$data_list['place']|escape}" size="50"></td>
     </tr> 
     <tr>
         <th>内容</th>
-        <td colspan="2"><textarea name="content" cols="50" rows="5">{$data['content']|escape}</textarea></td>
+        <td colspan="2"><textarea name="content" cols="50" rows="5">{$data_list['content']|escape}</textarea></td>
     </tr>
     </table>
-    <input name="save" type="submit" value="更新する">
+    <hr>
+    <input name="adjust" type="submit" value="更新する">
 </form>
-<hr>
 
 </body>
 </html>

@@ -9,10 +9,11 @@
 
 {if $data_list}
     <h2>{$data_list.place|escape}</h2>
-    <p>{$data_list.begin|date_format:"%Y年%m月%d日 %H:%M"|escape} / 投稿者：<strong>{$data_list.id|escape}</strong></p>
+    <p>{$data_list.begin|date_format:"%Y年%m月%d日 %H:%M"|escape} ~ {$data_list.end|date_format:"%Y年%m月%d日 %H:%M"|escape}</p>
     <p>{$data_list.content|escape|nl2br}</p>
+    <hr>
     <form method="post" action="delete_schedule.php?id={$data_list.id|escape}">
-        <button type="submit" name="delete" value="send">削除する</button>
+        <button type="submit" name="delete" value="delete">削除する</button>
     </form>
 {else}
     <p>データが存在しません．</p>

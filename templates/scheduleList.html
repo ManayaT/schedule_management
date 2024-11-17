@@ -4,18 +4,45 @@
     <meta charset="UTF-8">
     <title>スケジュール管理</title>
     <!-- <link rel="stylesheet" href="style.css"> -->
+    <script defer src="js/get_now_date.js"></script>
 </head>
 <body>
 <h1>スケジュール一覧</h1>
 
+<form method="post" action="schedule_list.php">
+    <label>一覧:</label>
+    <button type="submit" name="all" value="all">表示</button>
+</form>
+
+<form method="post" action="schedule_list.php">
+    <label>月単位検索:</label>
+    <input type="month" name="month" value="{$currentMonth}">
+    <button type="submit">表示</button>
+</form>
+
+<form method="post" action="schedule_list.php">
+    <label>週間検索:</label>
+    <input type="week" name="week" value="{$currentWeek}">
+    <button type="submit">表示</button>
+</form>
+
+<hr>
+
+<form method="post" action="set_schedule.php">
+    <button type="submit" name="registration" value="registration">スケジュールを登録する</button>
+</form>
+
 {* 掲示板データを表示する処理 *}
 {foreach from=$schedule_list item=schedule}
+<hr>
 <h2>{$schedule.place|escape}</h2>
-<p>{$schedule.begin|date_format:"%Y年%m月%d日 %H:%M"|escape} / 投稿者：<strong>{$schedule.id|escape}</strong></p>
+<p>{$schedule.begin|date_format:"%Y年%m月%d日 %H:%M"|escape} ~ {$schedule.end|date_format:"%Y年%m月%d日 %H:%M"|escape}</p>
 <p>{$schedule.content|escape|nl2br}</p>
 <button onclick="location.href='adjust_schedule.php?id={$schedule.id|escape}'">更新</button>
 <button onclick="location.href='delete_schedule.php?id={$schedule.id|escape}'">削除</button>
 {/foreach}
+
+
 
 </body>
 </html>

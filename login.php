@@ -20,32 +20,28 @@
         $username = $_POST["username"];
 
         if (!strlen($_POST["username"])) {
-            $error_message[] = "本文を入力してください。";
+            $error_message[] = "ユーザ名を入力してください．";
         } else if (!strlen($_POST["password"])) {
-            $error_message[] = "本文を入力してください。";
+            $error_message[] = "パスワードを入力してください．";
         }
 
         // エラーメッセージがない場合のみデータベースに登録
         if (!count($error_message)) {
             $hashed_pass = hash('sha256', $password);
-
             // ユーザー名とパスワードでデータベース内を検索する準備
             $stmt = $mysqli->prepare("SELECT * FROM user WHERE username = ? AND password = ? LIMIT 1");
 
             if ($stmt) {
                 // ユーザー名とパスワードのバインド
                 $stmt->bind_param("ss", $username, $hashed_pass);
-                
                 // クエリの実行
                 $stmt->execute();
-                
                 // 結果を取得して確認
                 $result = $stmt->get_result();
                 if ($result->num_rows > 0) {
                     $_SESSION["user_name"] = $username;
                     header('Location: schedule_list.php');
                     exit();
-
                 } else {
                     $alert = "<script type='text/javascript'>alert('パスワードまたはユーザ名が違います．');</script>";
                     echo $alert;

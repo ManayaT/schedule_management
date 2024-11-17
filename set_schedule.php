@@ -8,7 +8,10 @@
         header('Location: login.php');
         exit();
     } else {
-        echo "loginUser: " . $_SESSION["user_name"];
+        echo "loginUser: " . $_SESSION["user_name"] . 
+        '<form method="post" action="login.php">
+            <button type="submit" name="registration" value="registration">ログアウト</button>
+        </form>';
     }
 
     error_reporting(E_ALL);
@@ -70,6 +73,6 @@
     // テンプレート変数をアサインして、テンプレートを表示する
     $smarty->assign("error_message", $error_message);
     $smarty->assign("schedule_list", $schedule_list);
-    $smarty->display("adjustSchedule.html"); // テンプレートを表示
+    $smarty->display("setSchedule.html"); // テンプレートを表示
 
 ?>
