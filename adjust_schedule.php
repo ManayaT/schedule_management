@@ -27,7 +27,7 @@
         $id = $_GET['id'];
         // echo "取得したID: " . htmlspecialchars($id, ENT_QUOTES, 'UTF-8');
     } else {
-        echo "IDが指定されていません。";
+        echo "IDが指定されていません．";
     }  
 
     if (isset($_POST["adjust"])) {
@@ -35,7 +35,7 @@
         
         // 入力チェック
         if (!strlen($_POST["content"])) {
-            $error_message[] = "本文を入力してください。";
+            $error_message[] = "本文を入力してください．";
         }
     
         if (!count($error_message)) {
@@ -56,9 +56,9 @@
                 // クエリの実行
                 if ($stmt->execute()) {
                     if ($stmt->affected_rows > 0) {
-                        $success_message = "データが更新されました。";
+                        $success_message = "データが更新されました．";
                     } else {
-                        $success_message = "データに変更はありませんでした。";
+                        $success_message = "データに変更はありませんでした．";
                     }
                 } else {
                     $error_message[] = "データ更新に失敗しました: " . $stmt->error;

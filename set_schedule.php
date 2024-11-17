@@ -26,7 +26,7 @@
     if (isset($_POST["save"])) {
         $error_message = array();
         if (!strlen($_POST["content"])) {
-            $error_message[] = "本文を入力してください。";
+            $error_message[] = "本文を入力してください．";
         }
 
         // エラーメッセージがない場合のみデータベースに登録
