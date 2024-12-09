@@ -1,5 +1,8 @@
 https://github.com/ManayaT/schedule_management
 
+## 開発人数
+1人
+
 ## 使用技術
 ![Static Badge](https://img.shields.io/badge/HTML-black) ![Static Badge](https://img.shields.io/badge/JavaScript-black) ![Static Badge](https://img.shields.io/badge/css-black) ![Static Badge](https://img.shields.io/badge/PHP-purple) ![Static Badge](https://img.shields.io/badge/MySQL-lightblue) ![Static Badge](https://img.shields.io/badge/MAMP-gray) ![Static Badge](https://img.shields.io/badge/Smarty-yellow)
 
